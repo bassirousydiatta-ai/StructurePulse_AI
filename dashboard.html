@@ -1,0 +1,93 @@
+{% extends 'monitoring/base.html' %}
+
+{% block content %}
+
+<h1>Dashboard IoT</h1>
+
+<div class="row mt-4">
+
+    <div class="col-md-4">
+        <div class="card p-3 shadow">
+            <h3>Capteurs</h3>
+            <h2>{{ sensors }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card p-3 shadow">
+            <h3>Données</h3>
+            <h2>{{ data_count }}</h2>
+        </div>
+    </div>
+
+</div>
+
+<h3 class="mt-5">Dernières alertes</h3>
+
+<table class="table table-bordered mt-3">
+    <tr>
+        <th>Capteur</th>
+        <th>Message</th>
+        <th>Niveau</th>
+    </tr>
+
+    {% for alert in alerts %}
+    <tr>
+        <td>{{ alert.sensor.name }}</td>
+        <td>{{ alert.message }}</td>
+        <td>{{ alert.danger_level }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<canvas id="myChart"></canvas>
+
+<script>
+
+const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+
+    type: 'line',
+
+    data: {
+
+        labels: [
+            '1',
+            '2',
+            '3',
+            '4'
+        ],
+
+        datasets: [{
+
+            label: 'Vibrations',
+
+            data: [
+                20,
+                50,
+                80,
+                30
+            ]
+
+        }]
+    }
+
+});
+
+</script>
